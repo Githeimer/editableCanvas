@@ -1,6 +1,6 @@
 import React, { useContext, useState, useRef } from "react";
 import { Stage, Layer, Text, Rect } from "react-konva";
-import { CanvasContext } from "../context/canvasContext";
+import { CanvasContext } from "../context/canvas.context";
 
 const EditableCanvas = ({ setSelectedIndex }) => {
   const { canvasData, updateElement } = useContext(CanvasContext);

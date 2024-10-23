@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { CanvasContext } from "../context/canvasContext";
+import { CanvasContext } from "../context/canvas.context.jsx";
 
 const PropertiesBox = ({ selectedIndex }) => {
   const { canvasData, updateElement } = useContext(CanvasContext);

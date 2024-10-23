@@ -1,5 +1,5 @@
 import React from "react";
-import { CanvasProvider } from "../context/canvasContext";
+import { CanvasProvider } from "../context/canvas.context";
 import CanvasContainer from "./canvasContainer";
 
 const Canvas = () => {

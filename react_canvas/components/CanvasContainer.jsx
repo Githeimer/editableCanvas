@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import EditableCanvas from "./EditableCanvas";
 import PropertiesBox from "./PropertiesBox";
-import { CanvasContext } from "../context/canvasContext";
+import { CanvasContext } from "../context/canvas.context";
 
 const CanvasContainer = () => {
   const { addElement } = useContext(CanvasContext);
