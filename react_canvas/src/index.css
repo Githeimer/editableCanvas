@@ -1,0 +1,41 @@
+*{
+  margin: 0;
+  padding:0;
+  box-sizing: border-box;
+}
+
+body{
+  height: 100vh;
+  width: auto;
+}
+
+.container{
+  display: flex; 
+  flex-direction: row;
+   gap: 10px; 
+}
+.canvas-container{
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #adaaaa;
+  
+  
+}
+
+.canvas{
+  border: 1px solid #adaaaa;
+}
+
+.properties-box {
+  background-color: white;
+  width: 300px;
+  padding: 20px;
+  border: 1px solid #adaaaa;
+}
+
+.properties-box input{
+  border-radius: 2px;
+}
+.text-element{
+  border: 1px solid rgb(55, 52, 52);
+}

@@ -1,0 +1,15 @@
+{
+    "texts": [
+      {
+        "id": "text-1234567890",
+        "content": "Your text here",
+        "x": 100,
+        "y": 200,
+        "fontSize": 16
+      }
+      
+    ],
+    "canvasWidth": 800,
+    "canvasHeight": 600,
+    "timestamp": "2024-10-22T..."
+  }
