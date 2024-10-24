@@ -4,8 +4,8 @@ import { CanvasContext } from "../context/canvas.context";
 
 const EditableCanvas = ({ setSelectedIndex }) => {
   const { canvasData, updateElement } = useContext(CanvasContext);
-  const [canvasWidth, setWidth] = useState(400);
-  const [canvasHeight, setHeight] = useState(300);
+  const [canvasWidth, setWidth] = useState(900);
+  const [canvasHeight, setHeight] = useState(400);
   const [selectedIndex, setLocalSelectedIndex] = useState(null);
   const textRefs = useRef([]); // Store references to Text elements
 
@@ -17,7 +17,7 @@ const EditableCanvas = ({ setSelectedIndex }) => {
   const handleStageClick = (e) => {
     if (e.target === e.target.getStage()) {
       setSelectedIndex(null);
-      setLocalSelectedIndex(null); // Deselect text
+      setLocalSelectedIndex(null);
     }
   };
 
@@ -53,6 +53,7 @@ const EditableCanvas = ({ setSelectedIndex }) => {
                   strokeWidth={1}
                 />
               )}
+              {console.log(element.color)}
               <Text
                 ref={(ref) => (textRefs.current[index] = ref)} // Store the reference for width and height calculation
                 text={element.text}
@@ -63,6 +64,10 @@ const EditableCanvas = ({ setSelectedIndex }) => {
                 wrap="char" // Enable wrapping by characters
                 align="left" // Maintain left alignment
                 draggable
+                fontStyle={`${element.isBold ? "bold" : ""} ${
+                  element.isItalic ? "italic" : ""
+                }`}
+                fill={element.color}
                 onClick={() => handleTextClick(index)}
                 onDragMove={(e) => {
                   const textWidth = textRefs.current[index].width();

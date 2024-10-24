@@ -6,11 +6,12 @@ import { CanvasContext } from "../context/canvas.context";
 const CanvasContainer = () => {
   const { addElement } = useContext(CanvasContext);
   const [usertext, setUserText] = useState("New Text");
-  const [selectedIndex, setSelectedIndex] = useState(null);
+  const [selectedIndex, setSelectedIndex] = useState(null); // For element selection
 
   const changeText = (e) => {
     setUserText(e.target.value);
   };
+
   const handleAddText = () => {
     const newElement = {
       text: usertext,
@@ -19,7 +20,7 @@ const CanvasContainer = () => {
       fontSize: 20,
       isBold: false,
       isItalic: false,
-      color: "black",
+      color: "#000000",
     };
     addElement(newElement);
   };
@@ -33,7 +34,10 @@ const CanvasContainer = () => {
           <button onClick={handleAddText}>Add</button>
         </div>
       </div>
-      <PropertiesBox selectedIndex={selectedIndex} />
+      {/* Render PropertiesBox conditionally based on selection */}
+      {selectedIndex !== null && (
+        <PropertiesBox selectedIndex={selectedIndex} />
+      )}
     </div>
   );
 };

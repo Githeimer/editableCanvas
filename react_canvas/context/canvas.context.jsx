@@ -26,6 +26,14 @@ const CanvasProvider = ({ children }) => {
     });
   };
 
+  const deleteElement = (index) => {
+    console.log("Deleting element at index:", index);
+    setCanvasData((prev) => {
+      const updatedElements = prev.elements.filter((_, i) => i !== index);
+      return { ...prev, elements: updatedElements };
+    });
+  };
+
   return (
     <CanvasContext.Provider
       value={{
@@ -34,6 +42,7 @@ const CanvasProvider = ({ children }) => {
         updateElement,
         selectedElement,
         setSelectedElement,
+        deleteElement,
       }}
     >
       {children}
