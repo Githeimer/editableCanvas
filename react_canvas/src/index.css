@@ -4,28 +4,28 @@
   box-sizing: border-box;
 }
 
-body{
-  height: 100vh;
-  width: auto;
-}
+
 
 .container{
   display: flex; 
+}
+.canvas{
+  border: 1px solid red;
+}
+
+.canvas-properties-container{
+  display: flex;
   flex-direction: row;
-   gap: 10px; 
 }
 .canvas-container{
   display: flex;
   flex-direction: column;
   border: 1px solid #adaaaa;
-  
-  
 }
 
-.canvas{
-  border: 1px solid #adaaaa;
+.stage{
+  border: 1px solid red;
 }
-
 .properties-box {
   background-color: white;
   width: 300px;
@@ -38,4 +38,17 @@ body{
 }
 .text-element{
   border: 1px solid rgb(55, 52, 52);
+}
+
+.editable-canvas
+{
+  display: flex;
+  flex-direction: column;
+  width: auto;
+}
+
+.canvas-input{
+  display: flex;
+  flex-direction: column;
+ 
 }
