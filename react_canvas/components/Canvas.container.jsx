@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import EditableCanvas from "./EditableCanvas";
 import PropertiesBox from "./PropertiesBox";
 import { CanvasContext } from "../context/canvas.context";
+import { jsPDF } from "jspdf";
 
 const CanvasContainer = () => {
   const {
@@ -9,6 +10,7 @@ const CanvasContainer = () => {
     setHeight,
     setWidth,
     canvasWidth,
+    canvasHeight,
     addTitle,
     addTheme,
     addDescription,
@@ -20,7 +22,28 @@ const CanvasContainer = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [theme, setTheme] = useState("");
+  const [imageDataURL, setImageDataURL] = useState(null);
 
+  const handleExportImage = (dataURL) => {
+    setImageDataURL(dataURL);
+  };
+
+  // Save the canvas as PDF
+  const handleSaveAsPDF = () => {
+    if (!imageDataURL) {
+      console.error("No image data available to save as PDF");
+      return;
+    }
+
+    const pdf = new jsPDF({
+      orientation: canvasWidth > canvasHeight ? "landscape" : "portrait",
+      unit: "px",
+      format: [canvasWidth, canvasHeight],
+    });
+
+    pdf.addImage(imageDataURL, "PNG", 0, 0, canvasWidth, canvasHeight);
+    pdf.save(title);
+  };
   const handleTitle = (e) => {
     const newTitle = e.target.value;
     setTitle(newTitle);
@@ -60,7 +83,10 @@ const CanvasContainer = () => {
     <>
       <div className="canvas-properties-container">
         <div className="canvas" style={{ width: canvasWidth }}>
-          <EditableCanvas setSelectedIndex={setSelectedIndex} />
+          <EditableCanvas
+            setSelectedIndex={setSelectedIndex}
+            onExportImage={handleExportImage}
+          />
         </div>
         <div className="properties">
           {selectedIndex !== null && (
@@ -104,6 +130,7 @@ const CanvasContainer = () => {
           />
         </div>
         <button onClick={saveCanvasToFile}>Save Canvas</button>
+        <button onClick={handleSaveAsPDF}>Save as PDF</button>
       </div>
     </>
   );

@@ -149,6 +149,7 @@ const PropertiesBox = ({ selectedIndex }) => {
       <div>
         <input type="color" onChange={handleColorChange} value={colorValue} />
       </div>
+
       <div>
         <button onClick={() => deleteElement(selectedIndex)}>
           Delete Element

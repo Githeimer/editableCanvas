@@ -1,13 +1,14 @@
-import React, { useContext, useState, useRef } from "react";
+import React, { useState, useContext, useEffect, useRef } from "react";
 import { Stage, Layer, Text, Rect } from "react-konva";
 import { CanvasContext } from "../context/canvas.context";
 
-const EditableCanvas = ({ setSelectedIndex }) => {
+const EditableCanvas = ({ setSelectedIndex, onExportImage }) => {
   const { canvasData, updateElement, canvasHeight, canvasWidth } =
     useContext(CanvasContext);
 
   const [selectedIndex, setLocalSelectedIndex] = useState(null);
   const textRefs = useRef([]);
+  const stageRef = useRef(null);
 
   const handleTextClick = (index) => {
     setSelectedIndex(index);
@@ -21,6 +22,22 @@ const EditableCanvas = ({ setSelectedIndex }) => {
     }
   };
 
+  const handleExportImage = () => {
+    if (stageRef.current) {
+      const dataURL = stageRef.current.toDataURL({
+        pixelRatio: 2, // Higher resolution for better PDF quality
+      });
+      onExportImage(dataURL); // Pass image data URL back to parent
+    }
+  };
+
+  useEffect(() => {
+    // Only call handleExportImage if there are elements in canvasData
+    if (canvasData && canvasData.elements && canvasData.elements.length > 0) {
+      handleExportImage(); // Export image when canvas data is available
+    }
+  }, [canvasData]); // Trigger whenever canvasData changes
+
   const constrainPosition = (x, y, textWidth, textHeight) => {
     let newX = Math.max(0, Math.min(x, canvasWidth - textWidth));
     let newY = Math.max(0, Math.min(y, canvasHeight - textHeight));
@@ -29,7 +46,12 @@ const EditableCanvas = ({ setSelectedIndex }) => {
   };
 
   return (
-    <Stage width={canvasWidth} height={canvasHeight} onClick={handleStageClick}>
+    <Stage
+      width={canvasWidth}
+      height={canvasHeight}
+      onClick={handleStageClick}
+      ref={stageRef}
+    >
       <Layer className="stage">
         {canvasData.elements.map((element, index) => (
           <React.Fragment key={index}>
